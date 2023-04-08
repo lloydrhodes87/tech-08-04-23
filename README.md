@@ -31,7 +31,6 @@ curl --location --request POST 'https://j1r3sbvmh0.execute-api.eu-west-1.amazona
 }'
 ```
 
-You can use the following CURL to get messages that are in the DLQ.
 <br>
 <br>
 
@@ -42,9 +41,3 @@ Unit tests and CDK tests will both be run with the command
 ```
 npm run test
 ```
-
-<br>
-<br>
-# Testing in the UI
-
-You can use the following link to access the program via a frontend portal that I have also built.
