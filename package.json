@@ -8,7 +8,8 @@
     "build": "tsc",
     "watch": "tsc -w",
     "test": "jest",
-    "cdk": "cdk"
+    "cdk": "cdk",
+    "schema": "json2ts './schemas/*/*.json' ./src/types --style.singleQuote"
   },
   "devDependencies": {
     "@types/jest": "^29.2.4",
@@ -22,6 +23,8 @@
   "dependencies": {
     "aws-cdk-lib": "2.55.1",
     "constructs": "^10.0.0",
-    "source-map-support": "^0.5.21"
+    "source-map-support": "^0.5.21",
+    "json-schema-to-typescript": "^12.0.0",
+    "esbuild": "^0.17.15"
   }
 }
