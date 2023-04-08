@@ -1,0 +1,18 @@
+{
+	"title": "Outages Request",
+	"type": "object",
+	"additionalProperties": false,
+	"required": ["siteId", "forceError"],
+	"properties": {
+		"siteId": {
+			"type": "string",
+			"description": "The site id for outages",
+			"default": "pear-tree"
+		},
+		"forceError": {
+			"type": "boolean",
+			"description": "An error can be forced to look at error flow.",
+			"default": false
+		}
+	}
+}

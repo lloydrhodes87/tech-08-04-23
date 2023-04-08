@@ -1,0 +1,40 @@
+{
+	"title": "Outages Response",
+	"type": "object",
+	"additionalProperties": false,
+	"required": ["statusCode", "message", "outages"],
+	"properties": {
+		"statusCode": {
+			"type": "number",
+			"description": "Status Code",
+			"default": 200
+		},
+		"message": {
+			"type": "string",
+			"description": "the response message"
+		},
+		"outages": {
+			"type": "object",
+			"additionalProperties": false,
+			"required": ["id", "begin", "end", "name"],
+			"properties": {
+				"id": {
+					"type": "string",
+					"description": "id of the outage"
+				},
+				"begin": {
+					"type": "string",
+					"description": "start date of outage"
+				},
+				"end": {
+					"type": "string",
+					"description": "end date of outage"
+				},
+				"name": {
+					"type": "string",
+					"description": "Name of the outage"
+				}
+			}
+		}
+	}
+}
