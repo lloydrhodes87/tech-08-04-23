@@ -22,3 +22,18 @@ export const getOutages = (apiKey: string) => {
 	}
 };
 
+export const getSiteById = (siteId: string, apiKey: string) => {
+	const headers = {
+		contentType: 'application/json',
+		'x-api-key': apiKey,
+	};
+	try {
+		return axiosInstance.get(`site-info/${siteId}`, { headers });
+	} catch (error: unknown) {
+		if (error instanceof AxiosError) {
+			throw error.response?.data.message;
+		} else {
+			throw error;
+		}
+	}
+};
