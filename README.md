@@ -31,6 +31,8 @@ curl --location --request POST 'https://j1r3sbvmh0.execute-api.eu-west-1.amazona
 }'
 ```
 
+An error can be forced by setting the forceError flag to true
+
 <br>
 <br>
 
