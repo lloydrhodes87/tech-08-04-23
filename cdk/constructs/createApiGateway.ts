@@ -3,7 +3,7 @@ import { Construct } from 'constructs';
 import { jsonMimeType, ResponseCodes } from '../constants';
 import { getResourceName } from '../helpers/getResourceName';
 import { KrakenStackProps } from '../kraken-stack-props';
-import outagesRequest  from '../../schemas/request/outagesRequest.json';
+import outagesRequest from '../../schemas/request/outagesRequest.json';
 
 export const createKrakenApi = (
 	scope: Construct,

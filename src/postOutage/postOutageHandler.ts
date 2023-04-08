@@ -1,5 +1,3 @@
-import { Handler } from "aws-cdk-lib/aws-lambda";
+import { Handler } from 'aws-cdk-lib/aws-lambda';
 
-export const handler: Handler = async () => {
-
-};
+export const handler: Handler = async () => {};
