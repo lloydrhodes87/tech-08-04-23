@@ -1,16 +1,38 @@
 import * as cdk from 'aws-cdk-lib';
+import { CfnOutput } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
-// import * as sqs from 'aws-cdk-lib/aws-sqs';
+import { createKrakenApi } from '../constructs/createApiGateway';
+import { createDlqHandler } from '../constructs/createDlqHandler';
+import { createOutageHandler } from '../constructs/createPostOutageHandler';
+import { createStepFunction } from '../constructs/createStepFunction';
+import { createStepFunctionApiIntegration } from '../constructs/createStepFunctionApiIntegration';
+import { KrakenStackProps } from '../kraken-stack-props';
 
-export class KrakenflexStack extends cdk.Stack {
-  constructor(scope: Construct, id: string, props?: cdk.StackProps) {
-    super(scope, id, props);
+export class KrakenFlexStack extends cdk.Stack {
+	constructor(scope: Construct, id: string, props: KrakenStackProps) {
+		super(scope, id, props);
 
-    // The code that defines your stack goes here
+		const outageHandler = createOutageHandler(this, props);
+		const dlqHandler = createDlqHandler(this, props);
+		const stepFunction = createStepFunction(
+			this,
+			props,
+			outageHandler,
+			dlqHandler,
+		);
 
-    // example resource
-    // const queue = new sqs.Queue(this, 'KrakenflexQueue', {
-    //   visibilityTimeout: cdk.Duration.seconds(300)
-    // });
-  }
+		const stepFunctionIntegration = createStepFunctionApiIntegration(
+			this,
+			stepFunction.stateMachineArn,
+		);
+		const api = createKrakenApi(this, props, stepFunctionIntegration);
+
+		new CfnOutput(this, 'ApiEndpoint', {
+			value: api.url,
+		});
+
+		new CfnOutput(this, 'ApiId', {
+			value: api.restApiId,
+		});
+	}
 }
