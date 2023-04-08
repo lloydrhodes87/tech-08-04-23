@@ -1,6 +1,6 @@
 import { SSM } from 'aws-sdk';
 import { ParamTuple } from './constants';
-import { Outage, SiteInfo } from './types/interfaces';
+import { Device, Outage, SiteInfo } from './types/interfaces';
 
 const paramStore = new SSM();
 
@@ -34,4 +34,16 @@ export const outageHasIdInDeviceList = (
 	devices: { id: string }[],
 ) => {
 	return devices.find(({ id }) => id === outageId);
+};
+
+export const attachOutageDisplayName = (
+	outages: Outage[],
+	devices: Device[],
+) => {
+	return outages.map((outage) => {
+		return {
+			...outage,
+			name: devices.find((device) => device.id === outage.id)?.name,
+		};
+	});
 };
