@@ -14,25 +14,25 @@
 			"description": "the response message"
 		},
 		"outages": {
-			"type": "object",
-			"additionalProperties": false,
-			"required": ["id", "begin", "end", "name"],
-			"properties": {
-				"id": {
-					"type": "string",
-					"description": "id of the outage"
-				},
-				"begin": {
-					"type": "string",
-					"description": "start date of outage"
-				},
-				"end": {
-					"type": "string",
-					"description": "end date of outage"
-				},
-				"name": {
-					"type": "string",
-					"description": "Name of the outage"
+			"type": "array",
+			"items": {
+				"properties": {
+					"id": {
+						"type": "string",
+						"description": "id of the outage"
+					},
+					"begin": {
+						"type": "string",
+						"description": "start date of outage"
+					},
+					"end": {
+						"type": "string",
+						"description": "end date of outage"
+					},
+					"name": {
+						"type": "string",
+						"description": "Name of the outage"
+					}
 				}
 			}
 		}

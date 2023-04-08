@@ -43,7 +43,8 @@ export const attachOutageDisplayName = (
 	return outages.map((outage) => {
 		return {
 			...outage,
-			name: devices.find((device) => device.id === outage.id)?.name,
+			name: devices.find((device) => device.id === outage.id)
+				?.name as string,
 		};
 	});
 };
