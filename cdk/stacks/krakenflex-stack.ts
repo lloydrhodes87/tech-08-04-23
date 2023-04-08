@@ -2,6 +2,7 @@ import * as cdk from 'aws-cdk-lib';
 import { CfnOutput } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import { createKrakenApi } from '../constructs/createApiGateway';
+import { createDlq } from '../constructs/createDlq';
 import { createDlqHandler } from '../constructs/createDlqHandler';
 import { createOutageHandler } from '../constructs/createPostOutageHandler';
 import { createStepFunction } from '../constructs/createStepFunction';
@@ -13,7 +14,9 @@ export class KrakenFlexStack extends cdk.Stack {
 		super(scope, id, props);
 
 		const outageHandler = createOutageHandler(this, props);
-		const dlqHandler = createDlqHandler(this, props);
+		const dlq = createDlq(this, props);
+
+		const dlqHandler = createDlqHandler(this, props, dlq);
 		const stepFunction = createStepFunction(
 			this,
 			props,
