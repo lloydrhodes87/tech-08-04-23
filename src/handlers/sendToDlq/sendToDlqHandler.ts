@@ -3,7 +3,7 @@ import { SQSClient, SendMessageCommand } from '@aws-sdk/client-sqs';
 import { DLQ_URL } from '../../constants';
 const sqsClient = new SQSClient({ region: 'eu-west-1' });
 
-export const handler: Handler = async (input, context, callback) => {
+export const handler: Handler = async (input, _context, callback) => {
 	const params = {
 		MessageBody: input.errorMessage,
 		QueueUrl: DLQ_URL,

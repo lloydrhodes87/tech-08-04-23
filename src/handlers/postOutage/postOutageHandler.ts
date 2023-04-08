@@ -21,9 +21,9 @@ export const handler: Handler<OutagesRequest, OutagesResponse | void> = async (
 		}
 
 		const apiKey = await loadParam('kraken-api-key');
-
 		const outages = await getOutages(apiKey);
 		const sitesById = await getSiteById(input.siteId, apiKey);
+
 		const filteredOutages = filterOutages(outages.data, sitesById.data);
 
 		const namedOutages = attachOutageDisplayName(
