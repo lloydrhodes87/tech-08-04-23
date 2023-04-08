@@ -1,6 +1,6 @@
 import { SSM } from 'aws-sdk';
 import { ParamTuple } from './constants';
-
+import { Outage, SiteInfo } from './types/interfaces';
 
 const paramStore = new SSM();
 
@@ -15,3 +15,23 @@ export const loadParam = async (param: ParamTuple): Promise<string> => {
 	return result;
 };
 
+export const filterOutages = (outages: Outage[], siteInfo: SiteInfo) => {
+	const filteredOutages = outages.filter((outage) => {
+		return (
+			outageIsAfterDate(outage.begin) &&
+			outageHasIdInDeviceList(outage.id, siteInfo.devices)
+		);
+	});
+	return filteredOutages;
+};
+
+export const outageIsAfterDate = (outageDate: string) => {
+	return new Date(outageDate) >= new Date('2022-01-01T00:00:00.000Z');
+};
+
+export const outageHasIdInDeviceList = (
+	outageId: string,
+	devices: { id: string }[],
+) => {
+	return devices.find(({ id }) => id === outageId);
+};
