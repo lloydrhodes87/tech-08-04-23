@@ -30,7 +30,7 @@ export const createStepFunction = (
 
 	const stateMachine = new aws_stepfunctions.StateMachine(
 		scope,
-		'StateMachine',
+		'KrakenStateMachine',
 		{
 			stateMachineName: getResourceName(props, 'state-machine'),
 			definition: createStepFunctionDefinition(

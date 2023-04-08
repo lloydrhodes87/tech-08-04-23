@@ -4,6 +4,7 @@ import { jsonMimeType, ResponseCodes } from '../constants';
 import { getResourceName } from '../helpers/getResourceName';
 import { KrakenStackProps } from '../kraken-stack-props';
 import outagesRequest from '../../schemas/request/outagesRequest.json';
+import outagesResponse from '../../schemas/response/outagesResponse.json';
 
 export const createKrakenApi = (
 	scope: Construct,
@@ -39,11 +40,18 @@ export const createKrakenApi = (
 		schema: outagesRequest as aws_apigateway.JsonSchema,
 	});
 
+	const outageResponseModel = krakenApi.addModel('OutageResponseModel', {
+		modelName: 'OutageResponseModel',
+		contentType: jsonMimeType,
+		schema: outagesResponse as aws_apigateway.JsonSchema,
+	});
+
 	krakenResource.addMethod('POST', stepFunctionIntegration, {
 		requestModels: { [jsonMimeType]: outageRequestModel },
 		methodResponses: [
 			{
 				statusCode: ResponseCodes.Success,
+				responseModels: { [jsonMimeType]: outageResponseModel },
 			},
 			{
 				statusCode: ResponseCodes.BadRequest,
