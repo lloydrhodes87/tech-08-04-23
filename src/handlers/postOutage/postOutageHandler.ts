@@ -5,13 +5,12 @@ import {
 	loadParam,
 } from '../../helpers';
 import { getOutages, getSiteById, postOutages } from '../../krakenService';
-import { NamedOutage } from '../../types/interfaces';
 import { OutagesRequest } from '../../types/outagesRequest';
 import { OutagesResponse } from '../../types/outagesResponse';
 
 export const handler: Handler<OutagesRequest, OutagesResponse | void> = async (
 	input,
-	context,
+	_context,
 	callback,
 ) => {
 	try {
